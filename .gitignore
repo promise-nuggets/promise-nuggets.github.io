@@ -1,0 +1,5 @@
+out
+.DS_Store
+node_modules
+db.json
+.docpad.db

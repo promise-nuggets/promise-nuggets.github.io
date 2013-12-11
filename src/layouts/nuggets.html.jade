@@ -1,0 +1,8 @@
+---
+layout: base
+---
+h1
+	unless document.isTOC
+		a.back(href='/promise-nuggets') ↩
+	span= document.title
+.content!= content

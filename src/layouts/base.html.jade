@@ -1,0 +1,21 @@
+!!! 5
+html
+  head
+    meta(charset='utf-8')
+    meta(name="viewport", 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi")
+    meta(content='True', name='HandheldFriendly')
+    title= document.title 
+    link(rel='shortcut icon', href='/ico/favicon.ico')
+    link(rel='stylesheet', href='/styles/style.css')
+    link(rel='stylesheet', href='/styles/nuggets.css')
+    link(rel='stylesheet', href='http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css')
+    
+  body
+    .main!=content
+    script(src='http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js')
+    script.
+        function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+        $('code').forEach(function(el) { el.className += ' prettyprint'; });
+        prettyPrint();
+
