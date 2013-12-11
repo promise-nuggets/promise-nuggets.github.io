@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>The first relief - when sync becomes async</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><h1><a href="/promise-nuggets" class="back">↩</a><span>The first relief - when sync becomes async</span></h1><div class="content"><p>I hear you. Promise code doesn&#39;t look too different from regular node callbacks
+or event emitters, except that you use a second callback for the error. And 
+you&#39;re still not convinced that there is any benefit to using <code>.then()</code> to 
+create new promises.</p>
+<p>Okay then. Lets take things to the next level.</p>
+<p>Using <code>.then()</code>, you can attach the callbacks later if you want.</p>
+<p>For example <code>fs.readFileAsync(file)</code> returns a promise. That promise is a value, 
+so you can put that in a var, or return it from a function:</p>
+<pre><code class="lang-js">var filePromise = fs.readFile(file);
+filePromise.done(function(res) { ... }, function(err) {});</code></pre>
+<p>Okay, that&#39;s still not much of an improvement. How about this then? You can 
+attach more than one callback to a promise if you like:</p>
+<pre><code class="lang-js">filePromise.done(function(res) { uploadData(url, res); });
+filePromise.done(function(res) { saveLocal(url, res); }, 
+    function(err), {});
+// etc</code></pre>
+<p>Hey, this is beginning to look more and more like streams - they too can be 
+piped to multiple destinations. But unlike streams, you can attach more 
+callbacks and get the value even <em>after</em> the file reading operation completes.</p>
+<p>The promise will cache the value, and call your callback right after the next
+tick. The file reading operation is always done only once - no need to repeat 
+it.</p>
+<p>All of this makes it easier when you need to switch code that was previously 
+sync but had to become async for some reason. </p>
+<p>For example: imagine that you need to get some stats about two file versions </p>
+<ul>
+<li>like number of lines in both versions and the number of lines in their diff:</li>
+</ul>
+<pre><code class="lang-js">var first = files[0], other = files[1];
+var diffFirstOther = diff(first, other);
+
+var firstLines = first.split(&#39;\n&#39;).length,
+    otherLines = other.split(&#39;\n&#39;).length;
+
+var diffLines = diffFirstOther.split(&#39;\n&#39;);
+
+var result = {
+    first: firstLines, 
+    second: secondLines, 
+    diff: diffLines
+};</code></pre>
+<p>Later on, you figure out that the <code>diff()</code> function is kind of expensive in 
+terms of CPU power, so you want it to run in another process. Lets see what
+are your options:</p>
+<h4 id="callbacks">Callbacks</h4>
+<p>You need to change the function <code>diff</code> to take a callback, and you move 
+the diffLines calculation inside. So far so good:</p>
+<pre><code class="lang-js">var first = files[0], other = files[1];
+diff(first, other, function(err, diffFirstOther) {
+    var diffLines = diffFirstOther.split(&#39;\n&#39;);
+});</code></pre>
+<p>But wait, now the result needs to be inside that callback too. </p>
+<pre><code class="lang-js">var first = files[0], other = files[1];
+diff(first, other, function(err, diffFirstOther) {
+    var diffLines = diffFirstOther.split(&#39;\n&#39;);
+    var result = {
+        first: firstLines, 
+        second: secondLines, 
+        diff: diffLines
+    };
+});
+var firstLines = first.split(&#39;\n&#39;).length,
+    otherLines = other.split(&#39;\n&#39;).length;</code></pre>
+<p>This works but its horribly unintuitive because it looks like you&#39;re using 
+the variables <code>firstLines</code> and <code>secondLines</code> before they are available. So you 
+decide its best to move those lines at the top:</p>
+<pre><code class="lang-js">var first = files[0], other = files[1];
+var firstLines = first.split(&#39;\n&#39;).length,
+    otherLines = other.split(&#39;\n&#39;).length;
+
+diff(first, other, function(err, diffFirstOther) {
+    var diffLines = diffFirstOther.split(&#39;\n&#39;);
+    var result = {
+        first: firstLines, 
+        second: secondLines, 
+        diff: diffLines
+    };
+});</code></pre>
+<h4 id="promises">Promises</h4>
+<p>With promises our code can stay almost exactly the same. No need to move things
+around to make them more intuitive. No need to figure out whether we need to
+stuff other lines inside our callback because they have a dependency on the
+result of that callback. Instead, we combine:</p>
+<ul>
+<li>the ability to attach callbacks whenever we want, </li>
+<li>the power to create new promises by returning from <code>.then()</code>, and </li>
+<li>the use of promise values to replace the original values</li>
+</ul>
+<pre><code class="lang-js">var first = files[0], other = files[1];
+var pDiffFirstOther = diff(first, other);
+
+var firstLines = first.split(&#39;\n&#39;).length,
+    otherLines = other.split(&#39;\n&#39;).length;
+
+var pDiffLines = pDiffFirstOther.then(function(diff) { 
+    return diff.split(&#39;\n&#39;); 
+});
+
+var pResult = pDiffLines.then(function(diffLines) {
+    return {
+        first: firstLines, 
+        second: secondLines, 
+        diff: diffLines
+    };
+});</code></pre>
+<p>Everything is exactly the same, except that we now have promises instead of
+values.</p>
+<p>Whenever we want to do some extra sync (or async) processing on these 
+promises, we can unpack them with <code>.then()</code> and apply our transformation inside
+the callback, then return a new value which will be packed in a new promise. 
+No need to move code around to make it fit under the same callback.</p>
+<p>Thats pretty great, isn&#39;t it? But <a href="06-safety-of-then-exceptions.html">wait till you see what happens with 
+errors</a></p>
+</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+$('code').forEach(function(el) { el.className += ' prettyprint'; });
+prettyPrint();
+</script></body></html>

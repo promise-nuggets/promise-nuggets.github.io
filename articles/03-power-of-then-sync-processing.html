@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>The power of then - sync processing</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><h1><a href="/promise-nuggets" class="back">↩</a><span>The power of then - sync processing</span></h1><div class="content"><p>Its easy to <a href="02-creating-new-functions.html">just pass the callback or return a promise</a> 
+if we don&#39;t need to do other stuff to the result. </p>
+<p>But what if we wanted to do additional processing? What if we want to read a 
+single line of a file? Then we&#39;ll need to add some code to split the file into 
+lines and get the specified line. Lets ses how we can do that.</p>
+<h4 id="callbacks">Callbacks</h4>
+<p>To do this with callbacks, we&#39;ll pass our custom callback that does the 
+splitting. </p>
+<p>The callback bails-out if there was an error reading the file,
+otherwise proceeds to split the content and call the original callback with 
+the line content:</p>
+<pre><code class="lang-js">function readLine(file, line, callback) {
+    fs.readFile(file, function process(err, content) {
+        if (err) return callback(err);
+        callback(null, content.toString().split(&#39;\n&#39;)[line]);
+    }); 
+}
+readLine(&#39;myfile.txt&#39;, 2, function(err, line) {
+    // handle error or use line
+});</code></pre>
+<h4 id="promises">Promises</h4>
+<p>To create a promise-based function we can use another promise method called 
+<code>.then()</code>. It works exactly the same as <code>.done()</code>, but also returns a promise 
+for the value returned inside its callbacks. </p>
+<p>We can simply return the line from inside the first .then callback. We get a 
+promise for that line outside of the callback (which we return from the 
+function)</p>
+<pre><code class="lang-js">function readLine(file, line) {
+    return fs.readFileAsync(file).then(function(res) {
+        return res.toString().split(&#39;\n&#39;)[line];
+    });
+}
+readLine(file, line).done(function(line) {
+    // use line
+}, function(err) {
+    // handle error
+});</code></pre>
+<p>When you call a promise&#39;s .then function, a new promise is created and returned 
+by <code>.then</code>. Its a promise to apply all the operations inside the then callback 
+after the original async operation completes, and return the result.</p>
+<h2 id="notes">Notes</h2>
+<p>In the callback example, we must explicitly handle the error. Since we can&#39;t
+deal with that error there, we must call the passed callback to pass that error. </p>
+<p>In the promise example, we can skip the error handling function. If we do that,
+the error will automatically propagate with the returned promise for a line. 
+Yes, that means that you don&#39;t have to write <code>if (err) return callback(err)</code>
+anymore - promises do the equivalent of that by default.</p>
+<p>Another useful way to think of <code>then</code> vs <code>done</code>: <code>Promise.done()</code> is the 
+equivalent of <code>Array.forEach</code> while <code>Promise.then()</code> is the equivalent for 
+<code>Array.map</code>. You use the first when you don&#39;t want to create a new promise, and 
+the second when you do.</p>
+</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+$('code').forEach(function(el) { el.className += ' prettyprint'; });
+prettyPrint();
+</script></body></html>

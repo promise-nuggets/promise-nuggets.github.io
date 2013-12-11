@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>Doing things in parallel (async.parallel)</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><h1><a href="/promise-nuggets" class="back">↩</a><span>Doing things in parallel (async.parallel)</span></h1><div class="content"><p>One of the benefits of using node is the ability to run multiple I/O tasks
+concurrently. Lets see how we can achieve that using callbacks or promises.</p>
+<h4 id="callbacks">Callbacks</h4>
+<p>The most popular node module to run callback-based functions in parallel is 
+<a href="//github.com/caolan/async">caolan&#39;s async</a></p>
+<pre><code class="lang-js">function readTwoFiles(file1, file2, callback) {
+    async.parallel([
+        fs.readFile.bind(fs, file1),
+        fs.readFile.bind(fs, file2),
+    ], callback);
+}
+readTwoFiles(file1, file2, function(err, files) {
+    console.log(files[0], files[1]);
+})</code></pre>
+<p>The callback is called with no error and an array of results after all 
+operations are complete, or when the first error is encountered.</p>
+<h4 id="promises">Promises</h4>
+<p>Bluebird and Q give you <code>.all()</code>, a method that creates a new promise from 
+an array of promises:</p>
+<pre><code class="lang-js">function readTwoFiles(file1, file2) {
+    return Bluebird.all([fs.readFileAsync(file1), 
+        fs.readFileAsync(file2)]);
+}
+readTwoFiles(file1, file2).then(function(files) {
+    console.log(files[0], files[1]);
+})</code></pre>
+<p>The resulting promise is fulfilled when all the promises in the array are
+fulfilled or is rejected with an error when the first error is encountered.</p>
+<h2 id="notes">Notes</h2>
+<p>async.parallel expects functions that take a single callback argument. 
+<code>Function.bind()</code> allows us to create such functions by binding some of the
+arguments with predefined values. Therefore </p>
+<pre><code class="lang-js">fs.readFile.bind(fs, file1)</code></pre>
+<p>returns a function that works like this:</p>
+<pre><code class="lang-js">function(callback) { fs.readFile(file1, callback); }</code></pre>
+</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+$('code').forEach(function(el) { el.className += ' prettyprint'; });
+prettyPrint();
+</script></body></html>

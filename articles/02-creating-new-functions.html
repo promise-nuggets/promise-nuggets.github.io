@@ -1,0 +1,18 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>Creating new functions</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><h1><a href="/promise-nuggets" class="back">↩</a><span>Creating new functions</span></h1><div class="content"><p>Creating simple functions is easy</p>
+<h4 id="callbacks">Callbacks</h4>
+<p>To create a callback-taking function, add a callback argument to your function.
+Then you can pass the callback to another callback-taking function</p>
+<pre><code class="lang-js">function readMyFile(callback) {
+    fs.readFile(&#39;myfile.txt&#39;, callback); 
+}</code></pre>
+<h4 id="promises">Promises</h4>
+<p>To create a promise-based function, simply return the promise as a result.</p>
+<pre><code class="lang-js">function readMyFile() {
+    return fs.readFileAsync(&#39;myfile.txt&#39;);
+}</code></pre>
+<p>But what if you want to do additional processing? Then you&#39;ll also need to 
+<a href="03-power-of-then-sync-processing.html">create your own callback, or use the power of <code>.then()</code></a></p>
+</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+$('code').forEach(function(el) { el.className += ' prettyprint'; });
+prettyPrint();
+</script></body></html>
