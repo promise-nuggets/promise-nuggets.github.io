@@ -25,9 +25,9 @@ service.transform = function(string, callback)
 ```js
 function transformFile(inPath, outPath, callback) {
 	async.waterfall([
-		fs.readFile.bind(fs, file1, 'utf8'),	
+		fs.readFile.bind(fs, inPath, 'utf8'),	
 		service.transform,
-		fs.writeFile
+		fs.writeFile.bind(fs, outPath)
 	], callback);
 }
 transformFile(input, output, function(err) {
@@ -47,7 +47,7 @@ operations without any helper tools:
 function transformFile(input, output) {
 	return fs.readFileAsync(input, 'utf8')
 		.then(service.transformAsync)
-		.then(fs.writeFileAsync); 
+		.then(fs.writeFileAsync.bind(fs, output)); 
 }
 transformFile(fileIn, fileOut).done(function() {
 	console.log("All ok!");
@@ -86,7 +86,7 @@ function transformFile(input, output) {
 			return service.transformAsync(data);
 		})
 		.then(function(transformed) {
-			return fs.writeFileAsync(transformed)
+			return fs.writeFileAsync(output, transformed)
 		}); 
 }
 ```
