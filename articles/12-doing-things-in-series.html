@@ -8,9 +8,9 @@ support streams, then write the transformed file somewhere else.</p>
 <pre><code class="lang-js">service.transform = function(string, callback)</code></pre>
 <pre><code class="lang-js">function transformFile(inPath, outPath, callback) {
     async.waterfall([
-        fs.readFile.bind(fs, file1, &#39;utf8&#39;),    
+        fs.readFile.bind(fs, inPath, &#39;utf8&#39;),    
         service.transform,
-        fs.writeFile
+        fs.writeFile.bind(fs, outPath)
     ], callback);
 }
 transformFile(input, output, function(err) {
@@ -24,7 +24,7 @@ operations without any helper tools:</p>
 <pre><code class="lang-js">function transformFile(input, output) {
     return fs.readFileAsync(input, &#39;utf8&#39;)
         .then(service.transformAsync)
-        .then(fs.writeFileAsync); 
+        .then(fs.writeFileAsync.bind(fs, output)); 
 }
 transformFile(fileIn, fileOut).done(function() {
     console.log(&quot;All ok!&quot;);
@@ -53,7 +53,7 @@ makes it easier - first, <code>async.waterfall</code></p>
             return service.transformAsync(data);
         })
         .then(function(transformed) {
-            return fs.writeFileAsync(transformed)
+            return fs.writeFileAsync(output, transformed)
         }); 
 }</code></pre>
 <p><code>async.waterfall()</code> is pretty cool. It starts by giving us a callback, then
