@@ -16,7 +16,7 @@ function readFilePromise() {
 <p>If we want to promisify all functions in a given object we can use 
 <code>Promise.promisifyAll()</code></p>
 <pre><code>Promise.promisifyAll(fs);</code></pre>
-<p>This will generate functions with the Async prefix and add them to the object,
+<p>This will generate functions with the Async suffix and add them to the object,
 i.e. <code>fs.readFileAsync()</code></p>
 </div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
 $('code').forEach(function(el) { el.className += ' prettyprint'; });
