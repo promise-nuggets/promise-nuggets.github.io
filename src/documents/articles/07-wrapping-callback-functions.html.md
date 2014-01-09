@@ -36,7 +36,7 @@ If we want to promisify all functions in a given object we can use
 Promise.promisifyAll(fs);
 ```
 
-This will generate functions with the Async prefix and add them to the object,
+This will generate functions with the Async suffix and add them to the object,
 i.e. `fs.readFileAsync()`
 
 
