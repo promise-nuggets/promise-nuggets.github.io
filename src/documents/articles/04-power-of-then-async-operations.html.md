@@ -9,14 +9,14 @@ In the [previous example](03-power-of-then-sync-processing.html) we learned
 how to apply sync transformations to the result. But what if we need to do 
 another async operation instead? 
 
-For example, what if we want to fetch the user from  a database, then fetch all
+For example, what if we want to fetch the user from a database, then fetch all
 of his friends?
 
 
 #### Callbacks
 
-With callbacks we can nest the friend fetching operation and pass the original 
-callback
+With callbacks we can nest the friend fetching operation and pass the original
+callback.
 
 ```js
 function getUserFriends(id, callback) {
@@ -29,7 +29,7 @@ function getUserFriends(id, callback) {
 
 #### Promises
 
-With promises, we can return the promise for the fetched friends from inside 
+With promises, we can return the promise for the fetched friends from inside
 `.then`
 
 ```js
@@ -40,7 +40,7 @@ function getUserFriends(id) {
 }
 ```
 
-And we get a promise for the fetched friends outside of `.then`
+And we get a promise for the fetched friends outside of `.then`.
 
 ## Notes
 

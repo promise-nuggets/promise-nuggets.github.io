@@ -5,12 +5,12 @@ category: Introduction
 date: 2007-01-05
 ---
 
-Creating simple functions is easy
+Creating simple functions is easy.
 
 #### Callbacks
 
 To create a callback-taking function, add a callback argument to your function.
-Then you can pass the callback to another callback-taking function
+Then you can pass the callback to another callback-taking function.
 
 ```js
 function readMyFile(callback) {
@@ -29,4 +29,4 @@ function readMyFile() {
 ```
 
 But what if you want to do additional processing? Then you'll also need to 
-[create your own callback, or use the power of `.then()`](03-power-of-then-sync-processing.html)
+[create your own callback, or use the power of `.then()`](03-power-of-then-sync-processing.html).
