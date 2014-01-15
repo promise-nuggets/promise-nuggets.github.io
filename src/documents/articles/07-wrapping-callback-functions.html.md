@@ -37,6 +37,4 @@ Promise.promisifyAll(fs);
 ```
 
 This will generate functions with the Async suffix and add them to the object,
-i.e. `fs.readFileAsync()`
-
-
+e.g. `fs.readFileAsync()`

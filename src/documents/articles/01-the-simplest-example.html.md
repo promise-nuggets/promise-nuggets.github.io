@@ -38,13 +38,13 @@ means we can't return the file content.
 But we can still return something: we can return the reading operation itself. 
 And that operation is represanted with a promise.
 
-Its is sort of like a single-value stream:
+It's is sort of like a single-value stream:
 
 ```js
 net.connect(port).on('data', function(res) { 
 	doStuffWith(res); 
 }).on('error', function(err) { 
-	hadnleError(); 
+	handleError();
 });
 ```
 

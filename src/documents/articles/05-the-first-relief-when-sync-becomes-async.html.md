@@ -154,5 +154,5 @@ promises, we can unpack them with `.then()` and apply our transformation inside
 the callback, then return a new value which will be packed in a new promise. 
 No need to move code around to make it fit under the same callback.
 
-Thats pretty great, isn't it? But [wait till you see what happens with 
+That's pretty great, isn't it? But [wait 'til you see what happens with
 errors](06-safety-of-then-exceptions.html)
