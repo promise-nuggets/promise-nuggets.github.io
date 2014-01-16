@@ -39,7 +39,7 @@ makes it easier - first, <code>async.waterfall</code></p>
 <pre><code class="lang-js">function transformFile(inPath, outPath, done) {
     async.waterfall([
         function(callback) { 
-            fs.readFile(file1, &#39;utf8&#39;, callback); }        
+            fs.readFile(file1, &#39;utf8&#39;, callback); },    
         function(data, callback) { 
             service.transform(data, callback); },
         function(transformed, callback) { 

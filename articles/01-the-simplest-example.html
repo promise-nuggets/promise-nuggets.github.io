@@ -18,11 +18,11 @@ That operation is not yet complete at the point when readFile returns. This
 means we can&#39;t return the file content. </p>
 <p>But we can still return something: we can return the reading operation itself. 
 And that operation is represanted with a promise.</p>
-<p>Its is sort of like a single-value stream:</p>
+<p>It&#39;s is sort of like a single-value stream:</p>
 <pre><code class="lang-js">net.connect(port).on(&#39;data&#39;, function(res) { 
     doStuffWith(res); 
 }).on(&#39;error&#39;, function(err) { 
-    hadnleError(); 
+    handleError();
 });</code></pre>
 <p>But there are also some important differences which are going to be covered
 later on.</p>
