@@ -36,7 +36,7 @@ That operation is not yet complete at the point when readFile returns. This
 means we can't return the file content. 
 
 But we can still return something: we can return the reading operation itself. 
-And that operation is represanted with a promise.
+And that operation is represented by a promise.
 
 It's is sort of like a single-value stream:
 
