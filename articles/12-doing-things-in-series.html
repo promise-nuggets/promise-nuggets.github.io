@@ -1,4 +1,20 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>Doing things in series (async.waterfall)</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a><h1><a href="/" class="back">↩</a><span>Doing things in series (async.waterfall)</span></h1><div class="content"><p>We can <a href="10-doing-things-in-parallel.html">run things in parallel</a>, but what if 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi">
+    <meta content="True" name="HandheldFriendly">
+    <title>Doing things in series (async.waterfall)</title>
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/nuggets.css">
+    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">
+  </head>
+  <body>
+    <div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+<h1><a href="/" class="back">↩</a><span>Doing things in series (async.waterfall)</span>
+</h1>
+<div class="content"><p>We can <a href="10-doing-things-in-parallel.html">run things in parallel</a>, but what if 
 we want to run things in series? </p>
 <p>Example: read a file, transform it using a transformation service that doesn&#39;t 
 support streams, then write the transformed file somewhere else.</p>
@@ -64,7 +80,13 @@ which it can use to pass a result to the 3rd function in the list and so on.</p>
 from inside <code>.then()</code>, we get a promise for the same value on the outside. We 
 can  immediately attach another <code>.then()</code> on the outside and continue chaining.</p>
 <p>Both of these patterns flatten our code.</p>
-</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
-$('code').forEach(function(el) { el.className += ' prettyprint'; });
-prettyPrint();
-</script></body></html>
+</div></div>
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <script>
+      function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+      $('code').forEach(function(el) { el.className += ' prettyprint'; });
+      prettyPrint();
+      
+    </script>
+  </body>
+</html>

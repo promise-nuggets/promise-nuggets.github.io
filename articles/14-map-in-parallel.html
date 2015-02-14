@@ -1,4 +1,20 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"><meta content="True" name="HandheldFriendly"><title>Parallel map (async.map)</title><link rel="shortcut icon" href="/ico/favicon.ico"><link rel="stylesheet" href="/styles/style.css"><link rel="stylesheet" href="/styles/nuggets.css"><link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></head><body><div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a><h1><a href="/" class="back">↩</a><span>Parallel map (async.map)</span></h1><div class="content"><p>When we want to apply the same function to every item in an array of values, 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi">
+    <meta content="True" name="HandheldFriendly">
+    <title>Parallel map (async.map)</title>
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/nuggets.css">
+    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">
+  </head>
+  <body>
+    <div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+<h1><a href="/" class="back">↩</a><span>Parallel map (async.map)</span>
+</h1>
+<div class="content"><p>When we want to apply the same function to every item in an array of values, 
 we use <code>Array.map</code></p>
 <pre><code class="lang-js">[1,2,3,4].map(function square(x) { 
     return x * x; 
@@ -32,7 +48,13 @@ usual tool on that array - Promise.all.</p>
 <p>What if we can&#39;t run everything in parallel? Perhaps the operation is very 
 expensive and therefore we would like to fetch the items in series instead of
 parallel. Then <a href="15-map-in-series.html">we will need to change our code a bit</a></p>
-</div></div><script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script><script>function $(q) { return [].slice.call(document.querySelectorAll(q)); }
-$('code').forEach(function(el) { el.className += ' prettyprint'; });
-prettyPrint();
-</script></body></html>
+</div></div>
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <script>
+      function $(q) { return [].slice.call(document.querySelectorAll(q)); }
+      $('code').forEach(function(el) { el.className += ' prettyprint'; });
+      prettyPrint();
+      
+    </script>
+  </body>
+</html>
