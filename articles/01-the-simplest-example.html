@@ -29,7 +29,7 @@ another to handle the error:</p>
 })</code></pre>
 <h2 id="notes">Notes</h2>
 <p>Whats going on here? </p>
-<p><code>fs.readFileAsync(file)</code> starts a file reading operation. 
+<p><code>fs.readFileAsync(path)</code> starts a file reading operation. 
 That operation is not yet complete at the point when readFile returns. This 
 means we can&#39;t return the file content. </p>
 <p>But we can still return something: we can return the reading operation itself. 
