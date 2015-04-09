@@ -71,6 +71,6 @@ Yes, that means that you don't have to write `if (err) return callback(err)`
 anymore - promises do the equivalent of that by default.
 
 Another useful way to think of `then` vs `done`: `Promise.done()` is the 
-equivalent of `Array.forEach` while `Promise.then()` is the equivalent for 
+equivalent of `Array.forEach` while `Promise.then()` is the equivalent of 
 `Array.map`. You use the first when you don't want to create a new promise, and 
 the second when you do.
