@@ -36,11 +36,11 @@ name.
 
 ```js
 // start with current being an "empty" already-fulfilled promise
-var current = Promise.fulfilled();
+var current = Promise.resolve();
 
 Promise.all(ids.map(function(id) { 
     current = current.then(function() {
-    	return getItem(id) 
+    	return getItem(id) // returns promise
     }).then(function(result) { 
         return result.name;
     });
