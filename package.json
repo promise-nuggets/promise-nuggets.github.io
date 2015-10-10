@@ -7,13 +7,12 @@
     "npm": "1.3"
   },
   "dependencies": {
-    "docpad": "~6.57.0",
-    "docpad-plugin-jade": "~2.6.1",
-    "docpad-plugin-ghpages": "~2.4.0",
-    "docpad-plugin-less": "~2.2.0",
-    "docpad-plugin-eco": "~2.0.2",
-    "docpad-plugin-marked": "~2.1.2",
-    "rss": "~0.2.1"
+    "docpad": "*",
+    "docpad-plugin-jade": "*",
+    "docpad-plugin-ghpages": "*",
+    "docpad-plugin-less": "*",
+    "docpad-plugin-eco": "*",
+    "docpad-plugin-marked": "*"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
