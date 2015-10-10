@@ -35,8 +35,8 @@ transformFile(input, output, function(err) {
 })
 ```
 
-The callback is called with no error and an array of results after all 
-operations are complete, or when the first error is encountered.
+The callback is called with no error and the result of last task after all operations are complete
+, or when the first error is encountered.
 
 #### Promises
 
