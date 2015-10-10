@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi">
-    <meta content="True" name="HandheldFriendly">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"/>
+    <meta content="True" name="HandheldFriendly"/>
     <title>Series map (async.mapSeries)</title>
-    <link rel="shortcut icon" href="/ico/favicon.ico">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/nuggets.css">
-    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">
+    <link rel="shortcut icon" href="/ico/favicon.ico"/>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/nuggets.css"/>
+    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"/>
   </head>
   <body>
     <div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
@@ -28,24 +28,26 @@ the next download?</p>
     })
 }, function(err, results) {
     // results is an array of names
-});</code></pre>
+});
+</code></pre>
 <h4 id="promises">Promises</h4>
 <p>With promises, we just say what we mean. Create a promise that first waits for 
 the current download to complete, then download the next item, then extract its 
 name.</p>
 <pre><code class="lang-js">// start with current being an &quot;empty&quot; already-fulfilled promise
-var current = Promise.fulfilled();
+var current = Promise.resolve();
 
 Promise.all(ids.map(function(id) { 
     current = current.then(function() {
-        return getItem(id) 
+        return getItem(id) // returns promise
     }).then(function(result) { 
         return result.name;
     });
     return current;
 })).then(function(results) {
     // results is an array of names
-})</code></pre>
+})
+</code></pre>
 <p>Again, <code>Promise.all</code> does the rest.</p>
 <h2 id="notes">Notes</h2>
 <p>This example illustrates how promises compose really well. Instead of using a
@@ -62,7 +64,6 @@ our code again</a></p>
       function $(q) { return [].slice.call(document.querySelectorAll(q)); }
       $('code').forEach(function(el) { el.className += ' prettyprint'; });
       prettyPrint();
-      
     </script>
   </body>
 </html>

@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi">
-    <meta content="True" name="HandheldFriendly">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"/>
+    <meta content="True" name="HandheldFriendly"/>
     <title>Concurrency level (async.mapLimit)</title>
-    <link rel="shortcut icon" href="/ico/favicon.ico">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/nuggets.css">
-    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">
+    <link rel="shortcut icon" href="/ico/favicon.ico"/>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/nuggets.css"/>
+    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"/>
   </head>
   <body>
     <div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
@@ -28,7 +28,8 @@ case we need to use something else.</p>
     })
 }, function(err, results) {
     // results is an array of names
-});</code></pre>
+});
+</code></pre>
 <h4 id="promises">Promises</h4>
 <p>With promises we finally need a new helper function - <code>Promise.some</code> which is
 provided to us by bluebird</p>
@@ -50,7 +51,8 @@ var namePromises = ids.map(function(id) {
   });
 Promise.all(namePromises).then(function(names) {
     // use all names here.
-});</code></pre>
+});
+</code></pre>
 <p>Even though the code is a bit longer, its quite clear: When enough of the 
 queued items are complete, queue another download, wait for it to complete
 then extract the item&#39;s name.</p>
@@ -60,7 +62,6 @@ then extract the item&#39;s name.</p>
       function $(q) { return [].slice.call(document.querySelectorAll(q)); }
       $('code').forEach(function(el) { el.className += ' prettyprint'; });
       prettyPrint();
-      
     </script>
   </body>
 </html>

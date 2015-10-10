@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi">
-    <meta content="True" name="HandheldFriendly">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=medium-dpi"/>
+    <meta content="True" name="HandheldFriendly"/>
     <title>Wrapping callback functions</title>
-    <link rel="shortcut icon" href="/ico/favicon.ico">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/nuggets.css">
-    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css">
+    <link rel="shortcut icon" href="/ico/favicon.ico"/>
+    <link rel="stylesheet" href="/styles/style.css"/>
+    <link rel="stylesheet" href="/styles/nuggets.css"/>
+    <link rel="stylesheet" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"/>
   </head>
   <body>
     <div class="main"><a href="https://github.com/promise-nuggets/promise-nuggets.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
@@ -26,13 +26,15 @@ function readFilePromise() {
             else fulfill(content);
         })
     })
-}</code></pre>
+}
+</code></pre>
 <p>Or we could rely on bluebird&#39;s efficient <code>promisify</code> function</p>
-<pre><code class="lang-js">var readFilePromise = Promise.promisify(fs.readFile, fs);</code></pre>
+<pre><code class="lang-js">var readFilePromise = Promise.promisify(fs.readFile, fs);
+</code></pre>
 <p>If we want to promisify all functions in a given object we can use 
 <code>Promise.promisifyAll()</code></p>
-<pre><code>Promise.promisifyAll(fs);</code></pre>
-<p>This will generate functions with the Async suffix and add them to the object,
+<pre><code>Promise.promisifyAll(fs);
+</code></pre><p>This will generate functions with the Async suffix and add them to the object,
 e.g. <code>fs.readFileAsync()</code></p>
 </div></div>
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
@@ -40,7 +42,6 @@ e.g. <code>fs.readFileAsync()</code></p>
       function $(q) { return [].slice.call(document.querySelectorAll(q)); }
       $('code').forEach(function(el) { el.className += ' prettyprint'; });
       prettyPrint();
-      
     </script>
   </body>
 </html>
