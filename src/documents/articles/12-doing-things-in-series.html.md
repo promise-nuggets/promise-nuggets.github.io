@@ -68,11 +68,11 @@ makes it easier - first, `async.waterfall`
 function transformFile(inPath, outPath, done) {
 	async.waterfall([
 		function(callback) { 
-			fs.readFile(file1, 'utf8', callback); },	
+			fs.readFile(inPath, 'utf8', callback); },	
 		function(data, callback) { 
 			service.transform(data, callback); },
 		function(transformed, callback) { 
-			fs.writeFile(transformed, callback); }
+			fs.writeFile(outPath, transformed, callback); }
 	], done);
 }
 ``` 
