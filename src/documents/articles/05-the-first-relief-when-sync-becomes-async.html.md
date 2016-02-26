@@ -57,7 +57,7 @@ var diffLines = diffFirstOther.split('\n');
 
 var result = {
 	first: firstLines, 
-	second: secondLines, 
+	other: otherLines, 
 	diff: diffLines
 };
 ```
@@ -87,7 +87,7 @@ diff(first, other, function(err, diffFirstOther) {
 	var diffLines = diffFirstOther.split('\n');
 	var result = {
 		first: firstLines, 
-		second: secondLines, 
+		other: otherLines, 
 		diff: diffLines
 	};
 });
@@ -97,7 +97,7 @@ var firstLines = first.split('\n').length,
 ```
 
 This works but its horribly unintuitive because it looks like you're using 
-the variables `firstLines` and `secondLines` before they are available. So you 
+the variables `firstLines` and `otherLines` before they are available. So you 
 decide its best to move those lines at the top:
 
 ```js
@@ -109,7 +109,7 @@ diff(first, other, function(err, diffFirstOther) {
 	var diffLines = diffFirstOther.split('\n');
 	var result = {
 		first: firstLines, 
-		second: secondLines, 
+		other: otherLines, 
 		diff: diffLines
 	};
 });
@@ -140,7 +140,7 @@ var pDiffLines = pDiffFirstOther.then(function(diff) {
 var pResult = pDiffLines.then(function(diffLines) {
 	return {
 		first: firstLines, 
-		second: secondLines, 
+		other: otherLines, 
 		diff: diffLines
 	};
 });
@@ -156,3 +156,4 @@ No need to move code around to make it fit under the same callback.
 
 That's pretty great, isn't it? But [wait 'til you see what happens with
 errors](06-safety-of-then-exceptions.html)
+
