@@ -6,6 +6,16 @@ The source is kept in the `src` branch.
 
 Current nuggets can be found at `./src/documents/articles`
 
+# building the site
+
+```
+npm install
+npm start
+```
+
+You can see the generated output in the `out` directory 
+or in action with the server started by DocPad at localhost:9778
+
 # license
 
 [CC-0][CC-0]
