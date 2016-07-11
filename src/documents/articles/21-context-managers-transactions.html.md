@@ -58,7 +58,7 @@ Using promises, we can write our own context manager without using domains:
 ```js
 function using(resource, fn) {
   // wraps it in case the resource was not promise
-  var pResource = Promise.cast(resource); 
+  var pResource = Promise.resolve(resource); 
   return pResource.then(fn).finally(function() { 
     return pResource.then(function(resource) { 
       return resource.dispose(); 
