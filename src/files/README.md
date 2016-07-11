@@ -6,6 +6,22 @@ The source is kept in the `src` branch.
 
 Current nuggets can be found at `./src/documents/articles`
 
+# building the site
+
+```
+npm install
+npm start
+```
+
+You can see the generated output in the `out` directory 
+or in action at localhost:8080 with for example `http-server`:
+
+```
+npm install --global http-server
+cd out
+http-server -p 8080
+```
+
 # license
 
 [CC-0][CC-0]
