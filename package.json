@@ -14,8 +14,8 @@
     "docpad-plugin-eco": "*",
     "docpad-plugin-marked": "*"
   },
-  "main": "node_modules/docpad/bin/docpad-server",
+  "main": "docpad-server",
   "scripts": {
-    "start": "node_modules/docpad/bin/docpad-server"
+    "start": "docpad-server"
   }
 }
