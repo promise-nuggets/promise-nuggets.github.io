@@ -18,7 +18,7 @@ For example `fs.readFileAsync(file)` returns a promise. That promise is a value,
 so you can put that in a var, or return it from a function:
 
 ```js
-var filePromise = fs.readFile(file);
+var filePromise = fs.readFileAsync(file);
 filePromise.done(function(res) { ... }, function(err) {});
 ```
 
