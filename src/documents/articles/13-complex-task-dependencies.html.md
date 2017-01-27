@@ -56,4 +56,19 @@ files.getLastTwoVersions(filename)
 
 ## Notes
 
-TODO.
+Instead of using `.spread`, the well known `.then` can still be used 
+using ES2015 array destructuring:
+
+```js
+files.getLastTwoVersions(filename)
+    .then(function(items) {
+        return [versions.get(items.last),
+        	    versions.get(items.previous)];
+    })
+    .then(function([v1, v2]) { 
+        return diffService.compare(v1.blob, v2.blob)
+    })
+    .then(function(diff) {
+        // voila, diff is ready. Do something with it.
+    });
+```
