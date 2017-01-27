@@ -5,7 +5,7 @@ category: Multiple operations
 date: 2007-01-05
 ---
 
-We can [run things in parallel](10-doing-things-in-parallel.html), but what if 
+We can [run things in parallel](11-doing-things-in-parallel.html), but what if
 we want to run things in series? 
 
 Example: read a file, transform it using a transformation service that doesn't 
