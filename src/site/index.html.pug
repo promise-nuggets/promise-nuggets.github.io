@@ -1,0 +1,28 @@
+---
+layout: nuggets.html.pug
+title: Promise nuggets
+isTOC: true
+---
+div
+  - var nuggets = collections.posts;
+  - nuggets = nuggets.sort(function(p1, p2) {
+  -       return p1.path.localeCompare(p2.path);
+  -   }).filter(function(p){
+  -       return !p.hidden && p.category;
+  -   }).reduce(function(acc, p) {
+  -       p.url = p.path.replace(/md$/, 'html')
+  -				//console.log(p.basename);
+  -       if (!acc[p.category]) acc[p.category] = [p];
+  -       else acc[p.category].push(p);
+  -       return acc;
+  -   }, {})
+
+  each items, category in nuggets
+    .category
+      .name
+        h2= category
+      ol.items
+        each post in items
+          li.post
+            a(href=post.url)=post.title
+

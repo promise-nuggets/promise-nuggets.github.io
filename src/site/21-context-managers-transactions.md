@@ -1,7 +1,7 @@
 
 ---
 title: Context managers and transactions
-layout: nuggets
+layout: nuggets.html.pug
 category: Advanced examples
 level: 2
 date: 2007-01-05
@@ -29,8 +29,8 @@ function using(resource, fn, done) {
     });
   }
   d.once('error', closeAndDone);
-  d.run(function() { 
-    fn(resource, closeAndDone); 
+  d.run(function() {
+    fn(resource, closeAndDone);
   });
 }
 ```
@@ -58,11 +58,11 @@ Using promises, we can write our own context manager without using domains:
 ```js
 function using(resource, fn) {
   // wraps it in case the resource was not promise
-  var pResource = Promise.resolve(resource); 
-  return pResource.then(fn).finally(function() { 
-    return pResource.then(function(resource) { 
-      return resource.dispose(); 
-    }); 
+  var pResource = Promise.resolve(resource);
+  return pResource.then(fn).finally(function() {
+    return pResource.then(function(resource) {
+      return resource.dispose();
+    });
   });
 }
 ```
@@ -73,17 +73,17 @@ Using it is fairly straightforward
 function connectAndFetchSomething(...) {
   return using(client.connect(host), function(conn) {
     var stuff = JSON.parse(something);
-    return conn.doThings(stuff).then(function(res) { 
-      return conn.doOherThingWith(JSON.parse(res)); 
+    return conn.doThings(stuff).then(function(res) {
+      return conn.doOherThingWith(JSON.parse(res));
     ));
-  }); 
+  });
 });
 ```
 
-The resources will always be disposed of after the promise chain returned 
-within `using`'s `fn` argument completes. Even if an error was thrown within 
-that function (e.g. from JSON.parse) or its inner `.then` closures (like the 
-second JSON.parse), or if a promise in the chain was rejected (equivalent to 
+The resources will always be disposed of after the promise chain returned
+within `using`'s `fn` argument completes. Even if an error was thrown within
+that function (e.g. from JSON.parse) or its inner `.then` closures (like the
+second JSON.parse), or if a promise in the chain was rejected (equivalent to
 callbacks calling with an error).
 
 The same technique can be used for database transactions:
@@ -91,7 +91,7 @@ The same technique can be used for database transactions:
 ```js
 function beginTransaction(fn) {
   var tx = db.begin();
-  return tx.then(fn).then(function(res) { 
+  return tx.then(fn).then(function(res) {
     return tx.commit().then(function() {
       return res;
     });
@@ -103,7 +103,7 @@ function beginTransaction(fn) {
 ```
 
 Now you don't need to manually commit/rollback transactions anymore - it will
-happen automatically depending on whether an error happens or not in the 
+happen automatically depending on whether an error happens or not in the
 returned promise chain. Woah.
 
 ```js
@@ -113,7 +113,7 @@ function doQueries() {
       return tx.otherQuery(...);
     }).then(function() {
       // this will be the value of the resulting promise.
-      return tx.resultQuery(...); 
+      return tx.resultQuery(...);
     })
   });
 }
@@ -121,17 +121,17 @@ function doQueries() {
 
 ## Notes
 
-The method `.finally()` allows you to schedule another operation to be executed 
-without modifying the result or error from the original promise. It works 
+The method `.finally()` allows you to schedule another operation to be executed
+without modifying the result or error from the original promise. It works
 similarly to the sync `finally` in `try / catch / finally`
 
-The context manager idea can be extended further to allow us to add extra 
+The context manager idea can be extended further to allow us to add extra
 resources which will be automatically disposed. The API could look like this:
 
 ```js
-using(client.connect(host1), 
+using(client.connect(host1),
       client.connect(host2), function(conn1, conn2) {
-        return pipeStreams(conn1.resultReader(query), 
+        return pipeStreams(conn1.resultReader(query),
                            conn2.resultWriter());
 }).done(function(res){
   // all resources are disposed of
@@ -147,7 +147,7 @@ using(function(autodispose) {
   var conn1 = autodispose(client.connect(host1)),
       conn2 = autodispose(client.connect(host2));
   return Promise.all(conn1, conn2).then(function() {
-    return pipeStreams(conn1.resultReader(query), 
+    return pipeStreams(conn1.resultReader(query),
                        conn2.resultWriter());
   })
 }).done(function(res){

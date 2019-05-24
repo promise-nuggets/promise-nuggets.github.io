@@ -1,11 +1,11 @@
 ---
 title: Safety of then - thrown errors
-layout: nuggets
+layout: nuggets.html.pug
 category: Introduction
 date: 2007-01-05
 ---
 
-We need to write a function that reads a config file and parses it as JSON. 
+We need to write a function that reads a config file and parses it as JSON.
 How can we do that safely?
 
 #### Callbacks
@@ -40,7 +40,7 @@ function readConfig(file) {
 ## Notes
 
 In the callback example, we must be careful not to wrap the callback inside the
-try block! Otherwise, an error thrown from inside that callback will cause the 
+try block! Otherwise, an error thrown from inside that callback will cause the
 catch block to call it again.
 
 In the promises example, any errors thrown inside then will be propagated

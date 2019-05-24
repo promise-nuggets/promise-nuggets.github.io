@@ -1,6 +1,6 @@
 ---
 title: Doing things in parallel (async.parallel)
-layout: nuggets
+layout: nuggets.html.pug
 category: Multiple operations
 date: 2007-01-05
 ---
@@ -11,7 +11,7 @@ concurrently. Lets see how we can achieve that using callbacks or promises.
 
 #### Callbacks
 
-The most popular node module to run callback-based functions in parallel is 
+The most popular node module to run callback-based functions in parallel is
 [caolan's async](//github.com/caolan/async)
 
 
@@ -27,17 +27,17 @@ readTwoFiles(file1, file2, function(err, files) {
 })
 ```
 
-The callback is called with no error and an array of results after all 
+The callback is called with no error and an array of results after all
 operations are complete, or when the first error is encountered.
 
 #### Promises
 
-Bluebird and Q give you `.all()`, a method that creates a new promise from 
+Bluebird and Q give you `.all()`, a method that creates a new promise from
 an array of promises:
 
 ```js
 function readTwoFiles(file1, file2) {
-	return Bluebird.all([fs.readFileAsync(file1), 
+	return Bluebird.all([fs.readFileAsync(file1),
 		fs.readFileAsync(file2)]);
 }
 readTwoFiles(file1, file2).then(function(files) {
@@ -50,9 +50,9 @@ fulfilled or is rejected with an error when the first error is encountered.
 
 ## Notes
 
-async.parallel expects functions that take a single callback argument. 
+async.parallel expects functions that take a single callback argument.
 `Function.bind()` allows us to create such functions by binding some of the
-arguments with predefined values. Therefore 
+arguments with predefined values. Therefore
 
 ```js
 fs.readFile.bind(fs, file1)

@@ -1,21 +1,25 @@
 {
-  "name": "no-skeleton.docpad",
+  "name": "promise-nuggets",
   "version": "0.1.0",
-  "description": "New DocPad project without using a skeleton",
+  "description": "Promise nuggets",
   "engines": {
     "node": "0.10",
     "npm": "1.3"
   },
   "dependencies": {
-    "docpad": "*",
-    "docpad-plugin-jade": "*",
-    "docpad-plugin-ghpages": "*",
-    "docpad-plugin-less": "*",
-    "docpad-plugin-eco": "*",
-    "docpad-plugin-marked": "*"
+    "gh-pages": "^2.0.1",
+    "jstransformer-pug": "^0.3.0",
+    "metalsmith": "^2.3.0",
+    "metalsmith-collections": "^0.9.0",
+    "metalsmith-layouts": "^2.3.1",
+    "metalsmith-less": "^2.0.0",
+    "metalsmith-markdown": "^1.2.0",
+    "metalsmith-permalinks": "^2.2.0",
+    "metalsmith-pug": "^2.0.0"
   },
   "main": "docpad-server",
   "scripts": {
-    "start": "docpad-server"
+    "build": "node build.js",
+    "deploy": "gh-pages -d build"
   }
 }

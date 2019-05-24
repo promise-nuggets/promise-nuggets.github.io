@@ -1,5 +1,8 @@
+@mainColor: #f3ecdf;
+@grayColor: #666;
+@linkColor: #37c;
+@h1size: 2.3636rem;
 
-@import 'vars.less';
 
 * { box-sizing: border-box; }
 
@@ -18,8 +21,8 @@ body { margin:1ex; overflow-x:hidden; }
 
 
 
-h1 { 
-    font-size: @h1size; 
+h1 {
+    font-size: @h1size;
     line-height: @h1size + 0.3333rem;
     margin-top: 5rem;
     margin-bottom: 0.5rem;
@@ -28,12 +31,12 @@ h1.first {
     margin-top: 1rem;
 }
 
-h2 { 
-    font-size: @h1size / 1.333; 
-    line-height: @h1size / 1.333 + 0.333rem; 
+h2 {
+    font-size: @h1size / 1.333;
+    line-height: @h1size / 1.333 + 0.333rem;
 }
-h3 { 
-    font-size: @h1size / 1.333 / 1.333; 
+h3 {
+    font-size: @h1size / 1.333 / 1.333;
     line-height: @h1size / 1.333 / 1.333 + 0.333rem;
 }
 
@@ -61,7 +64,7 @@ h2, h3, h4 {
 @media screen and (min-width: 1150px) {
     .info-tiny {
         display:none;
-    }    
+    }
 }
 
 .info-tiny img {
@@ -90,7 +93,7 @@ h2, h3, h4 {
 .first {
     font-size:1.5em;
     text-shadow: 0 0 1px #000, 1px 2px 4px #fff, 2px 3px 4px #aaa;
-    margin-bottom: 0;    
+    margin-bottom: 0;
 }
 .first a { color: #000; }
 
@@ -102,7 +105,7 @@ h2, h3, h4 {
 }
 
 p {
-    line-height:1.45rem;    
+    line-height:1.45rem;
 }
 p.subtitle {
     line-height: 1.2rem;
@@ -145,7 +148,7 @@ a.img {
 a:hover { color: @linkColor; }
 a:active { color: @linkColor; }
 
-.post .date {    
+.post .date {
     margin: 0.5rem 0 1.5rem 0;
     font-style: italic;
     font-size: 0.8em;
@@ -164,7 +167,7 @@ a:active { color: @linkColor; }
     font-family: Monaco, "Liberation Mono", Courier, monospace;
     font-size: 13px;
     line-height: 1.5;
-    
+
     overflow: auto;
 }
 

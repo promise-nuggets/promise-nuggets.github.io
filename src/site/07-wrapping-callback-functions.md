@@ -1,6 +1,6 @@
 ---
 title: Wrapping callback functions
-layout: nuggets
+layout: nuggets.html.pug
 category: Introduction
 date: 2007-01-05
 ---
@@ -29,7 +29,7 @@ Or we could rely on bluebird's efficient `promisify` function
 var readFilePromise = Promise.promisify(fs.readFile, fs);
 ```
 
-If we want to promisify all functions in a given object we can use 
+If we want to promisify all functions in a given object we can use
 `Promise.promisifyAll()`
 
 ```

@@ -1,16 +1,16 @@
 ---
 title: Parallel map (async.map)
-layout: nuggets
+layout: nuggets.html.pug
 category: Multiple operations
 date: 2007-01-05
 ---
 
-When we want to apply the same function to every item in an array of values, 
+When we want to apply the same function to every item in an array of values,
 we use `Array.map`
 
 ```js
-[1,2,3,4].map(function square(x) { 
-	return x * x; 
+[1,2,3,4].map(function square(x) {
+	return x * x;
 });
 ```
 
@@ -42,8 +42,8 @@ simply use Array.map to get an array of promises for the names, then apply the
 usual tool on that array - Promise.all.
 
 ```js
-Promise.all(ids.map(function(id) { 
-    return getItem(id).then(function(result) { 
+Promise.all(ids.map(function(id) {
+    return getItem(id).then(function(result) {
         return result.name;
     });
 })).then(function(results) {
@@ -53,6 +53,6 @@ Promise.all(ids.map(function(id) {
 
 ## Notes
 
-What if we can't run everything in parallel? Perhaps the operation is very 
+What if we can't run everything in parallel? Perhaps the operation is very
 expensive and therefore we would like to fetch the items in series instead of
 parallel. Then [we will need to change our code a bit](15-map-in-series.html)
