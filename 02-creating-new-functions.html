@@ -1,0 +1,14 @@
+<p>Creating simple functions is easy.</p>
+<h4 id="callbacks">Callbacks</h4>
+<p>To create a callback-taking function, add a callback argument to your function.
+Then you can pass the callback to another callback-taking function.</p>
+<pre><code class="language-js">function readMyFile(callback) {
+    fs.readFile(&#39;myfile.txt&#39;, callback); 
+}</code></pre>
+<h4 id="promises">Promises</h4>
+<p>To create a promise-based function, simply return the promise as a result.</p>
+<pre><code class="language-js">function readMyFile() {
+    return fs.readFileAsync(&#39;myfile.txt&#39;);
+}</code></pre>
+<p>But what if you want to do additional processing? Then you&#39;ll also need to 
+<a href="03-power-of-then-sync-processing.html">create your own callback, or use the power of <code>.then()</code></a>.</p>
